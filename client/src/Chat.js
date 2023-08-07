@@ -8,8 +8,9 @@ function Chat({ socket, username, room }) {
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        room: room,
-        author: username,
+        sender_id:1,
+        reciever_id: 2,
+        room_id:room,
         message: currentMessage,
         time:
           new Date(Date.now()).getHours() +
@@ -23,10 +24,12 @@ function Chat({ socket, username, room }) {
     }
 };
 
+
 useEffect(() => {
     socket.on("receive_message", (data) => {
+        console.log(data);
         setMessageList((list) => Array.from(new Set([...list, data])));
-    
+
     });
   }, [socket]);
 

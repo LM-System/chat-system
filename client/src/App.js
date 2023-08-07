@@ -2,8 +2,9 @@ import "./App.css";
 import io from "socket.io-client";
 import { useState } from "react";
 import Chat from "./Chat";
+import Notification from "./notification";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("http://localhost:4000");
 
 function App() {
   const [username, setUsername] = useState("");
@@ -39,7 +40,10 @@ function App() {
           <button onClick={joinRoom}>Join A Room</button>
         </div>
       ) : (
-        <Chat socket={socket} username={username} room={room} />
+        <>
+        {/* <Chat socket={socket} username={username} room={room} /> */}
+        <Notification socket={socket} username={username} room={room} />
+        </>
       )}
     </div>
   );
